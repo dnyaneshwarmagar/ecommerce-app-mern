@@ -12,7 +12,11 @@ const initialOrderState = {
 const orderReducer = (state = initialOrderState, action) => {
     switch (action.type) {
         case UPDATE_ORDER_ITEMS:
-            return { ...state, items: action.payload }
+            const items = action.payload;
+            const total_items = items.reduce((total,item)=>total + parseInt(item.quantity),0);
+            const total_cost = items.reduce((total,item)=>total + item.price * item.quantity,0);
+
+            return { ...state, items: action.payload ,total_cost,total_items}
         default:
             return state;
     }

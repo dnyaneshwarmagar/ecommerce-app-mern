@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import './App.css'
-import { Outlet} from "react-router-dom"
-import Home from './pages/Home'
-
+import "./App.css";
+import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
+import { useSelector } from "react-redux";
+import Navbar from "./components/Navbar";
 
 function App() {
-
+  const cartItems = useSelector((state) => state.cart.items);
   return (
     <>
-        <Outlet/>
+      <Navbar cartCount={cartItems.length} />
+      <Outlet />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
